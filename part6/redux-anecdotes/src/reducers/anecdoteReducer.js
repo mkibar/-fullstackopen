@@ -1,3 +1,5 @@
+import { createSlice } from "@reduxjs/toolkit";
+
 const anecdotesAtStart = [
   "If it hurts, do it more often",
   "Adding manpower to a late software project makes it later!",
@@ -19,41 +21,27 @@ const toAnecdote = (anecdote) => {
 
 const initialState = anecdotesAtStart.map(toAnecdote);
 
-const anecdoteReducer = (state = initialState, action) => {
-
-  switch (action.type) {
-    case "NEW":
-      return [...state, action.data];
-    case "VOTE":
-      const id = action.data.id;
+export const anecdoteSlice = createSlice({
+  name: "anecdotes",
+  initialState,
+  reducers: {
+    createAnecdote(state, action) {
+      return [...state, toAnecdote(action.payload)];
+    },
+    vote(state, action) {
+      const id = action.payload;
       const anecdoteToChange = state.find((n) => n.id === id);
       const changedAnecdote = {
         ...anecdoteToChange,
         votes: anecdoteToChange.votes + 1,
       };
-      //return changedAnecdote;
       return state.map((anecdote) =>
-        anecdote.id !== action.data.id ? anecdote : changedAnecdote
+        anecdote.id !== id ? anecdote : changedAnecdote
       );
-      //break;
-    default:
-      break;
-  }
-  return state;
-};
+    },
+  },
+});
 
-export const createAnecdote = (content) => {
-  return {
-    type: "NEW",
-    data: toAnecdote(content),
-  };
-};
-
-export const updateVote = (id) => {
-  return {
-    type: "VOTE",
-    data: { id },
-  };
-};
-
-export default anecdoteReducer;
+// Action creators are generated for each case reducer function
+export const { createAnecdote, vote } = anecdoteSlice.actions;
+export default anecdoteSlice.reducer;
