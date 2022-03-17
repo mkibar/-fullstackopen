@@ -1,27 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = { message: "you vote, if you like post" };
+const initialState = [];
 
 const notificationSlice = createSlice({
   name: "notification",
   initialState,
   reducers: {
-    updateMessage(state, action) {
-      //console.log("notification, update", state, action);
-      return { message: action.payload };
+    newNotificationMessage(state, action) {
+      state.push({ message: action.payload });
+    },
+    deleteNotificationMessage(state, action) {
+      state.shift();
     },
   },
 });
 
 export const showNotification = (message, timeOut) => {
   return (dispatch) => {
-    //console.log("notification, update0", message);
-    dispatch(updateMessage(message));
+    dispatch(newNotificationMessage(message));
     setTimeout(() => {
-      dispatch(updateMessage(""));
+      dispatch(deleteNotificationMessage());
     }, timeOut);
   };
 };
 
-export const { updateMessage } = notificationSlice.actions;
+export const { newNotificationMessage, deleteNotificationMessage } =
+  notificationSlice.actions;
 export default notificationSlice.reducer;
