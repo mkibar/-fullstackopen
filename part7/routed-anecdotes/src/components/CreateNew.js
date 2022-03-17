@@ -1,53 +1,53 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useField } from "../hooks";
 
 const CreateNew = (props) => {
-  const [content, setContent] = useState("");
-  const [author, setAuthor] = useState("");
-  const [info, setInfo] = useState("");
   const navigate = useNavigate();
+  const title = useField("text");
+  const author = useField("text");
+  const url = useField("text");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     props.addNew({
-      content,
-      author,
-      info,
+      content: title.value,
+      author: author.value,
+      info: url.value,
       votes: 0,
     });
-    props.setNotification(`A new anedote ${content} created!`);
+    props.setNotification(`A new anedote ${title.value} created!`);
     navigate("/anecdotes");
   };
-
+  const reset = (e) => {
+    e.preventDefault();
+    title.reset();
+    author.reset();
+    url.reset();
+  };
+  const parseAttributeNames = (field) => {
+    const { reset, ...items } = field;
+    return items;
+  };
   return (
     <div>
-      <h2>create a new anecdote</h2>
+      <h2>Create a new anecdote</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          content
-          <input
-            name="content"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-          />
+          Content
+          <input {...parseAttributeNames(title)} />
+          {/* <input {...title} /> */}
         </div>
         <div>
           author
-          <input
-            name="author"
-            value={author}
-            onChange={(e) => setAuthor(e.target.value)}
-          />
+          <input {...parseAttributeNames(author)} />
         </div>
         <div>
           url for more info
-          <input
-            name="info"
-            value={info}
-            onChange={(e) => setInfo(e.target.value)}
-          />
+          <input {...parseAttributeNames(url)} />
         </div>
-        <button>create</button>
+        <button>Create</button>
+        <button onClick={reset}>Reset</button>
       </form>
     </div>
   );
