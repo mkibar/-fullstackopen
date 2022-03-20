@@ -1,3 +1,5 @@
+export {};
+
 interface ExercisesResults {
   periodLength: number;
   trainingDays: number;
@@ -23,12 +25,12 @@ const parseArgumentsForCalculateExercises = (
   return days;
 };
 
-const calculateExercises = (
+export const calculateExercises = (
   target: number,
   days: Array<number>
 ): ExercisesResults => {
-  let zeroCount = days.filter((e) => e === 0).length;
-  let resultObj: ExercisesResults = {
+  const zeroCount: number = days.filter((e) => e === 0).length;
+  const resultObj: ExercisesResults = {
     periodLength: days.length,
     trainingDays: days.filter((e) => e > 0).length,
     success: false,
@@ -58,7 +60,7 @@ const calculateExercises = (
 
 try {
   const [target, ...days] = parseArgumentsForCalculateExercises(process.argv);
-  let result = calculateExercises(target, days);
+  const result: ExercisesResults = calculateExercises(target, days);
   console.log(result);
 } catch (error: unknown) {
   if (error instanceof Error) {

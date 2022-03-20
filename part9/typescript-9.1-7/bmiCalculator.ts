@@ -1,6 +1,14 @@
+export {};
+
 interface MultiplyValues {
   value1: number;
   value2: number;
+}
+
+interface BmiResult {
+  height: number;
+  weight: number;
+  bmi: string;
 }
 
 const parseArguments = (args: Array<string>): MultiplyValues => {
@@ -17,25 +25,32 @@ const parseArguments = (args: Array<string>): MultiplyValues => {
   }
 };
 
-const calculateBmi = (height: number, weight: number): number => {
+export const calculateBmi = (height: number, weightt: number): BmiResult => {
   if (height === 0) {
     throw new Error("Height cannot be equal to zero");
   }
-  let heightCm = height / 100;
-  let result = Math.floor(weight / (heightCm * heightCm));
+  let resultString = String("");
+  const heightCentimeter = Number(height / 100);
+  const bmi = Math.floor(weightt / (heightCentimeter * heightCentimeter));
+  if (bmi < 20) {
+    resultString = `${bmi} - Underweight`;
+  } else if (bmi >= 20 && bmi <= 24.9) {
+    resultString = `${bmi} - Normal (healthy weight)`;
+  } else {
+    resultString = `${bmi} - Overweight`;
+  }
+  const result: BmiResult = {
+    height: heightCentimeter,
+    weight: weightt,
+    bmi: resultString,
+  };
   return result;
 };
 
 try {
   const { value1, value2 } = parseArguments(process.argv);
-  let result = calculateBmi(value1, value2);
-  if (result < 20) {
-    console.log(`${result} - Underweight`);
-  } else if (result >= 20 && result <= 24.9) {
-    console.log(`${result} - Normal (healthy weight)`);
-  } else {
-    console.log(`${result} - Overweight`);
-  }
+  const result: BmiResult = calculateBmi(value1, value2);
+  console.log(result.bmi);
 } catch (error: unknown) {
   if (error instanceof Error) {
     console.error(error.message);
