@@ -34,6 +34,7 @@ const assertNever = (value: never): never => {
   );
 };
 
+// TODO: exeption throw
 const checkEntry = (entry: NewEntry): boolean => {
   if (
     !entry.description ||
