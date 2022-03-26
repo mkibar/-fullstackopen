@@ -2,11 +2,11 @@ import express = require("express");
 const router = express.Router();
 
 import patientService from "../services/patientService";
-import toNewPatientEntry from "../services/patientServiceHelper";
+import toNewPatientModel from "../services/patientServiceHelper";
+import { NewEntry } from "../types";
 
 router.get("/", (_request, response) => {
-  const data = patientService.getPatientsPick();
-  //return response.status(200).json(patientService.getPatients());
+  const data = patientService.getPatients();
   return response.status(200).json(data);
 });
 
@@ -22,12 +22,28 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   try {
-    const newPatientEntry = toNewPatientEntry(req.body);
-    
-    const addedEntry = patientService.addPatient(newPatientEntry);
+    const newPatientEntry = toNewPatientModel(req.body);
+
+    const addedPatient = patientService.addPatient(newPatientEntry);
+
+    res.json(addedPatient);
+  } catch (error) {
+    let errorMessage = "Something went wrong.";
+    if (error instanceof Error) {
+      errorMessage += " Error: " + error.message;
+    }
+    res.status(400).send(errorMessage);
+  }
+});
+
+router.post("/:id/entries", (req, res) => {
+  try {
+    const newEntry = req.body as NewEntry;
+    console.log("req.body", newEntry);
+    const addedEntry = patientService.addEntry(req.params.id, newEntry);
     console.log("addedEntry:", addedEntry);
 
-    res.json(addedEntry);
+    res.status(200).json(addedEntry);
   } catch (error) {
     let errorMessage = "Something went wrong.";
     if (error instanceof Error) {

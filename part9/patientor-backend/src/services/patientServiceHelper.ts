@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { GenderType, NewPatientModel } from "../types";
 import { isString, parseNotNullString, parseString } from "./servicesHelper";
 
@@ -29,13 +30,15 @@ import { isString, parseNotNullString, parseString } from "./servicesHelper";
 
 // Tip dönüşümü Yöntem 2: obje any ile alınır ve derleyici hatası gözardı edilir. object, request.body den gelir
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const toNewPatientEntry = (object: any): NewPatientModel => {
+const toNewPatientModel = (object: any): NewPatientModel => {
   const newEntry: NewPatientModel = {
     name: parseString(object.name),
     gender: parseGender(object.gender),
-    occupation: parseNotNullString(object.occupation,"occupation"),
+    occupation: parseNotNullString(object.occupation, "occupation"),
     ssn: parseString(object.ssn),
     dateOfBirth: parseString(object.dateOfBirth), // TODO:parseDate
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    entries: object.entries,
   };
 
   return newEntry;
@@ -54,4 +57,22 @@ export const isGender = (param: any): param is GenderType => {
   return Object.values(GenderType).includes(param);
 };
 
-export default toNewPatientEntry;
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// export const toNewPatientEntryModel = (object: any): EntryModel => {
+//   const newEntry: EntryModel = {
+//     date: parseString(object.date),
+//     description: parseString(object.description),
+//     specialist: parseString(object.specialist),
+//     type: parseString(object.type),
+//     employerName: parseString(object.employerName),
+
+//     discharge: object.discharge,
+//     diagnosisCodes: object.diagnosisCodes,
+//     sickLeave: object.sickLeave,
+//     id: "",
+//   };
+
+//   return newEntry;
+// };
+
+export default toNewPatientModel;

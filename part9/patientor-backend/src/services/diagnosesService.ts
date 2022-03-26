@@ -1,7 +1,7 @@
 import diagnoesesData from "../data/diagnoeses";
-import { DiagnosesModel } from "../types";
+import { DiagnoseEntry } from "../types";
 
-const getDiagnoeses = (): DiagnosesModel[] => {
+const getDiagnoeses = (): DiagnoseEntry[] => {
   return diagnoesesData.map(({ code, name }) => ({ code, name }));
 };
 
