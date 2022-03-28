@@ -2,7 +2,7 @@
 
 ## Part 0
 
-Helper, Diagram Generator: [Web Sequence Diagrams](https://www.websequencediagrams.com)
+Helper, Diagram Generator: [Web Sequence Diagrams](https://www.websequencediagrams.com)<br>
 Exercises: [Folder Link](/part0)<br>
 
 ## Part 1
