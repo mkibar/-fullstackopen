@@ -13,8 +13,8 @@ Exercises: [Anecdotes](/part1/anecdotes)
 
 ## Part 2
 
-Exercises: [Notes](/part2/part2-notes)<br>
-Exercises: [Phonebook](/part2/part2-phonebook)<br>
+Exercises: [Course Info](/part2/courseinfo)<br>
+Exercises: [Phonebook](/part2/phonebook)<br>
 Exercises: [Countries](/part2/countries)<br>
 
 ## Part 3
@@ -31,7 +31,7 @@ Exercises: [Bloglist](/part4/bloglist)<br>
 
 ## Part 5
 
-Exercises: [Bloglist Frontend](/paet5/bloglist-frontend)<br>
+Exercises: [Bloglist Frontend](/part5/bloglist-frontend)<br>
 
 ## Part 6
 
@@ -43,6 +43,11 @@ Exercises: [Redux Anecdotes](/part6/redux-anecdotes)<br>
 Exercises: [Routed Anecdotes](/part7/country-hook)<br>
 Exercises: [Country Hook](/part7/routed-anecdotes)<br>
 Exercises: [Ultimate Hook](/part7/ultimate-hooks)<br>
+Exercises: [Bloglist Frontend](/part7/bloglist-frontend)<br>
+Exercises: [Bloglist Backend](/part7/bloglist-backend)<br>
+
+URL to be used to add users:  [API endpoint Url](http://localhost:3003/api/user)<br>
+Json data: { "username":"mluukkai", "name":"Matti Luukkainen", "password" :"123" }
 
 ## Part 8
 
