@@ -8,11 +8,10 @@ const PersonForm = (props) => {
   const handleAdd = (e) => {
     e.preventDefault();
     let p = props.persons.find((e) => e.name === newPerson);
-    if(!newPerson){
-      props.showMessage(`Person name is not valid`,'error')
-    }
-    else if (p) {
-      props.showMessage(`${newPerson} is already added to phonebook`,'error')
+    if (!newPerson) {
+      props.showMessage(`Person name is not valid`, "error");
+    } else if (p) {
+      props.showMessage(`${newPerson} is already added to phonebook`, "error");
     } else {
       addPerson();
     }
@@ -33,9 +32,9 @@ const PersonForm = (props) => {
       let newArry = props.persons.concat(response);
       props.setPerson(newArry);
 
-      setNewPerson('');
-      setNewPhone('');
-      props.showMessage(`Person name addded`,'info')
+      setNewPerson("");
+      setNewPhone("");
+      props.showMessage(`Person name addded`, "info");
     });
   };
 
