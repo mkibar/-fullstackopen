@@ -27,7 +27,9 @@ function App() {
         setPersons(newPersonList);
         ShowMessage("Person deleted", "info");
       })
-      .catch((error) => ShowMessage("Get error:" + error, "error"));
+      .catch((error) =>
+        ShowMessage(`The person was already deleted from server`, "error")
+      );
   };
 
   const ShowMessage = (msg, mt) => {

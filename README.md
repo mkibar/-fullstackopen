@@ -24,6 +24,8 @@ Exercises: [Phonebook Backend](/part3/phonebook-backend)<br>
 Exercises: [Phonebook Frontend](/part3/phonebook-frontend)<br>
 Exercises: [Commandline Database](/part3/commandline-database)<br>
 
+Deploy address: [Public Deploy Url](https://phonebook-backend-002.herokuapp.com/)<br>
+
 ## Part 4
 
 Exercises: [Bloglist Backend](/part4/bloglist-backend)<br>
