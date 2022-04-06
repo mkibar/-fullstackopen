@@ -51,7 +51,8 @@ Json data: { "username":"mluukkai", "name":"Matti Luukkainen", "password" :"123"
 
 ## Part 8
 
-
+Exercises: [Library Backend](/part8/library-backend)<br>
+Exercises: [Library Frontend](/part8/library-frontend)<br>
 
 ## Part 9
 
