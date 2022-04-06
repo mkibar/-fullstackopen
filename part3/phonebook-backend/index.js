@@ -17,6 +17,8 @@ app.use(
 // body requestlerinin içerisinden json formatındaki verileri alabilmek için
 app.use(express.json());
 
+app.use(express.static('build'))
+
 // from origin 'http://...' has been blocked by CORS policy hatasını gidermek için
 const cors = require("cors");
 app.use(cors());
@@ -45,9 +47,9 @@ generateId = () => {
   return i;
 };
 
-app.get("/", (request, response) => {
-  response.send("<h1>Hello World!</h1>");
-});
+// app.get("/", (request, response) => {
+//   response.send("<h1>Hello World!</h1>");
+// });
 
 app.get("/api/persons", (request, response) => {
   Phonebook.find({}).then((e) => {
