@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import blogService from "../services/blogs";
 import BlogItem from "./BlogItem";
 
 const Blogs = (props) => {
-  const [blogs, setBlogs] = useState([]);
+  //const [blogs, setBlogs] = useState([]);
   const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
   const [newBlogVisible, setNewBlogVisible] = useState(false);
 
-  useEffect(() => {
-    blogService.getAllPosts().then((blogs) => {
-      setBlogs(blogs);
-    });
-  }, []);
+  // useEffect(() => {
+  //   blogService.getAllPosts().then((blogs) => {
+  //     setBlogs(blogs);
+  //   });
+  // }, []);
 
   const handleCreate = (event) => {
     event.preventDefault();
@@ -38,8 +38,8 @@ const Blogs = (props) => {
     }
 
     blogService.createPost({ title, author, url }).then((data) => {
-      blogs.push(data);
-      setBlogs(blogs);
+      props.blogs.push(data);
+      props.setBlogs(props.blogs);
 
       setAuthor("");
       setTitle("");
@@ -49,16 +49,16 @@ const Blogs = (props) => {
   };
 
   const setBlogItem = (item) => {
-    let objIndex = blogs.findIndex((e) => e.id === item.id);
-    blogs[objIndex] = item;
-    setBlogs(blogs);
+    let objIndex = props.blogs.findIndex((e) => e.id === item.id);
+    props.blogs[objIndex] = item;
+    props.setBlogs(props.blogs);
     props.handleMessage({ message: "Post updated.", type: "info" });
   };
 
   const deleteBlogItem = (item) => {
-    let objIndex = blogs.findIndex((e) => e.id === item.id);
-    blogs.splice(objIndex, 1);
-    setBlogs(blogs);
+    let objIndex = props.blogs.findIndex((e) => e.id === item.id);
+    props.blogs.splice(objIndex, 1);
+    props.setBlogs(props.blogs);
     props.handleMessage({ message: "Post deleted.", type: "info" });
   };
 
@@ -99,7 +99,7 @@ const Blogs = (props) => {
         </form>
       </div>
       <div id="div-blogs">
-        {blogs
+        {props?.blogs
           ?.sort((a, b) => {
             return b.likes - a.likes;
           })

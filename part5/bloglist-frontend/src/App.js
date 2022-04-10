@@ -9,6 +9,7 @@ const App = () => {
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
   const [message, setMessage] = useState({});
+  const [blogs, setBlogs] = useState([]);
 
   // local storage içerisinde kullanıcı bilgisi varsa otomatik giriş yap
   useEffect(() => {
@@ -19,6 +20,14 @@ const App = () => {
       blogService.setToken(user.token);
     }
   }, []);
+
+  useEffect(() => {
+    if (user) {
+      blogService.getAllPosts().then((blogss) => {
+        setBlogs(blogss);
+      });
+    }
+  }, [user]);
 
   // giriş işlemlerini kontrol et
   const handleLogin = async (event) => {
@@ -106,7 +115,12 @@ const App = () => {
           <button onClick={handleLogout}>Logout</button>
         </p>
         <Notification message={message} />
-        <Blogs handleMessage={handleMessage} user={user} />
+        <Blogs
+          blogs={blogs}
+          setBlogs={setBlogs}
+          handleMessage={handleMessage}
+          user={user}
+        />
       </div>
     </div>
   );

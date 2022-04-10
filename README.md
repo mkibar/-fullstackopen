@@ -5,17 +5,20 @@
 Helper, Diagram Generator: [Web Sequence Diagrams](https://www.websequencediagrams.com)<br>
 Exercises: [Folder Link](/part0)<br>
 
+
 ## Part 1
 
 Exercises: [Course Info](/part1/courseinfo)<br>
 Exercises: [Unicafe](/part1/unicafe)<br>
 Exercises: [Anecdotes](/part1/anecdotes)
 
+
 ## Part 2
 
 Exercises: [Course Info](/part2/courseinfo)<br>
 Exercises: [Phonebook](/part2/phonebook)<br>
 Exercises: [Countries](/part2/countries)<br>
+
 
 ## Part 3
 
@@ -26,19 +29,22 @@ Exercises: [Commandline Database](/part3/commandline-database)<br>
 
 Deploy address: [Public Deploy Url](https://phonebook-backend-002.herokuapp.com/)<br>
 
+
 ## Part 4
 
 Exercises: [Bloglist Backend](/part4/bloglist-backend)<br>
-Exercises: [Bloglist](/part4/bloglist)<br>
+
 
 ## Part 5
 
 Exercises: [Bloglist Frontend](/part5/bloglist-frontend)<br>
 
+
 ## Part 6
 
 Exercises: [Unicafe Redux](/part6/unicafe-redux)<br>
 Exercises: [Redux Anecdotes](/part6/redux-anecdotes)<br>
+
 
 ## Part 7
 
@@ -51,10 +57,12 @@ Exercises: [Bloglist Backend](/part7/bloglist-backend)<br>
 URL to be used to add users:  [API endpoint Url](http://localhost:3003/api/user)<br>
 Json data: { "username":"mluukkai", "name":"Matti Luukkainen", "password" :"123" }
 
+
 ## Part 8
 
 Exercises: [Library Backend](/part8/library-backend)<br>
 Exercises: [Library Frontend](/part8/library-frontend)<br>
+
 
 ## Part 9
 
