@@ -1,5 +1,5 @@
 const listHelper = require("../utils/list_helper");
-const User = require('../models/user')
+const User = require("../models/user");
 
 test("dummy returns one", () => {
   const blogs = [];
@@ -9,6 +9,17 @@ test("dummy returns one", () => {
 });
 
 describe("total likes", () => {
+  const oneBlog = [
+    {
+      _id: "5a422a851b54a676234d17a1",
+      title: "Test data title",
+      author: "Test data author",
+      url: "Test data url",
+      likes: 5,
+      __v: 0,
+    },
+  ];
+
   const blogs = [
     {
       _id: "5a422a851b54a676234d17f7",
@@ -60,13 +71,31 @@ describe("total likes", () => {
     },
   ];
 
+  test("empty list is zero", () => {
+    const resultLikes = listHelper.totalLikes([]);
+    expect(resultLikes).toBe(0);
+  });
+
   test("when list has only one blog, equals the likes of that", () => {
+    const result = listHelper.totalLikes(oneBlog);
+    expect(result).toBe(5);
+  });
+
+  test("total like test", () => {
     const result = listHelper.totalLikes(blogs);
     expect(result).toBe(36);
   });
 });
 
 describe("favorite blog", () => {
+  const oneBlog = [
+    {
+      title: "Test data title",
+      author: "Test data author",
+      likes: 5,
+    },
+  ];
+
   const blogs = [
     {
       title: "React patterns",
@@ -84,6 +113,20 @@ describe("favorite blog", () => {
       likes: 12,
     },
   ];
+
+  test("Empty list : {}", () => {
+    const result = listHelper.favoriteBlog([]);
+    expect(result).toEqual({});
+  });
+
+  test("favoriteBlog one", () => {
+    const result = listHelper.favoriteBlog(oneBlog);
+    expect(result).toEqual({
+      title: "Test data title",
+      author: "Test data author",
+      likes: 5,
+    });
+  });
 
   test("favoriteBlog", () => {
     const result = listHelper.favoriteBlog(blogs);
@@ -171,57 +214,47 @@ describe("most likes", () => {
   });
 });
 
-
-describe('when there is initially one user in db', () => {
-  // beforeEach(async () => {
-  //   await User.deleteMany({})
-
-  //   const passwordHash = await bcrypt.hash('sekret', 10)
-  //   const user = new User({ username: 'root', passwordHash })
-
-  //   await user.save()
-  // })
-
-  // test('creation succeeds with a fresh username', async () => {
-  //   const usersAtStart = await listHelper.usersInDb()
-
-  //   const newUser = {
-  //     username: 'mluukkai',
-  //     name: 'Matti Luukkainen',
-  //     password: 'salainen',
-  //   }
-
-  //   await api
-  //     .post('/api/users')
-  //     .send(newUser)
-  //     .expect(201)
-  //     .expect('Content-Type', /application\/json/)
-
-  //   const usersAtEnd = await listHelper.usersInDb()
-  //   expect(usersAtEnd).toHaveLength(usersAtStart.length + 1)
-
-  //   const usernames = usersAtEnd.map(u => u.username)
-  //   expect(usernames).toContain(newUser.username)
-  // })
-
-  test('creation fails with proper statuscode and message if username already taken', async () => {
-    const usersAtStart = await listHelper.usersInDb("root")
+describe("when there is initially one user in db", () => {
+  test("creation fails with proper statuscode and message if username already taken", async () => {
+    const users = [
+      {
+        username: "michaelchan",
+        name: "Michael Chan",
+        id: 1,
+      },
+      {
+        username: "root",
+        name: "Superuser",
+        id: 2,
+      },
+    ];
 
     const newUser = {
-      username: 'root',
-      name: 'Superuser',
-      password: 'salainen',
-    }
+      username: "root2",
+      name: "Superuser",
+    };
 
-    const result = await api
-      .post('/api/users')
-      .send(newUser)
-      .expect(400)
-      .expect('Content-Type', /application\/json/)
+    let findUser = users.find((user) => user.username === newUser.username);
 
-    expect(result.body.error).toContain('username must be unique')
+    expect(newUser.username).not.toEqual(findUser?.username);
+  });
+});
 
-    const usersAtEnd = await listHelper.usersInDb("root")
-    expect(usersAtEnd).toEqual(usersAtStart)
-  })
-})
+// const usersAtStart = await listHelper.usersInDb("root")
+
+// const newUser = {
+//   username: 'root',
+//   name: 'Superuser',
+//   password: 'salainen',
+// }
+
+// const result = await api
+//   .post('/api/users')
+//   .send(newUser)
+//   .expect(400)
+//   .expect('Content-Type', /application\/json/)
+
+// expect(result.body.error).toContain('username must be unique')
+
+// const usersAtEnd = await listHelper.usersInDb("root")
+// expect(usersAtEnd).toEqual(usersAtStart)

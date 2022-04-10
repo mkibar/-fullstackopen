@@ -1,4 +1,4 @@
-const User = require('../models/user')
+const User = require("../models/user");
 
 const dummy = (blogs) => {
   return 1;
@@ -9,6 +9,8 @@ const totalLikes = (blogs) => {
 };
 
 const favoriteBlog = (blogs) => {
+  if (blogs.length === 0) return {};
+
   return blogs.reduce(function (prev, current) {
     return prev.likes > current.likes ? prev : current;
   });
@@ -44,9 +46,9 @@ const mostLikes = (blogs) => {
 };
 
 const usersInDb = async (userName) => {
-    const users = await User.find({username:userName})
-    return users.map(u => u.toJSON())
-  }
+  const users = await User.find({ username: userName });
+  return users.map((u) => u.toJSON());
+};
 
 module.exports = {
   dummy,
@@ -55,5 +57,5 @@ module.exports = {
   mostBlogs,
   mostLikes,
 
-  usersInDb
+  usersInDb,
 };
